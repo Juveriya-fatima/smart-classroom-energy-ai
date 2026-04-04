@@ -1,4 +1,6 @@
-Smart Classroom Energy Optimization using Reinforcement Learning
+# Smart Classroom Energy Optimization using Reinforcement Learning
+
+AI-powered system that automatically manages classroom devices (lights, AC, computers) to reduce energy waste while maintaining student comfort.
 Overview
 
 Classrooms often waste electricity because lights, air conditioners, and computers remain ON even when they are not required. This leads to unnecessary energy consumption and increased electricity costs.
@@ -24,6 +26,15 @@ We designed a custom Reinforcement Learning environment where an AI agent intera
 The AI observes the current classroom conditions and decides actions such as turning devices ON or OFF.
 
 Over multiple training episodes, the agent learns to make better energy-efficient decisions.
+
+## Key Features
+
+- Reinforcement Learning based decision-making
+- Smart energy optimization for classrooms
+- Considers student presence and temperature
+- Time-of-day aware environment
+- Energy consumption modeling
+- AI learning visualization using training graphs
 
 Environment State
 
