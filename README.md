@@ -1,11 +1,14 @@
-Smart Classroom Energy Optimization using Reinforcement Learning
+# Smart Classroom Energy Optimization using Reinforcement Learning
+
+AI-powered system that automatically manages classroom devices (lights, AC, computers) to reduce energy waste while maintaining student comfort.
+
 Overview
 
 Classrooms often waste electricity because lights, air conditioners, and computers remain ON even when they are not required. This leads to unnecessary energy consumption and increased electricity costs.
 
 This project proposes a Smart Classroom Energy Management System powered by Reinforcement Learning. The AI agent learns how to control classroom devices in order to maintain student comfort while minimizing energy consumption.
 
-Problem Statement
+## Problem Statement
 
 In educational institutions, classroom devices are usually controlled manually. This often leads to situations where:
 
@@ -17,7 +20,7 @@ These issues cause significant energy waste.
 
 The goal of this project is to develop an AI-based system that automatically manages classroom devices based on environmental conditions and student presence.
 
-Proposed Solution
+## Proposed Solution
 
 We designed a custom Reinforcement Learning environment where an AI agent interacts with a simulated classroom.
 
@@ -25,7 +28,16 @@ The AI observes the current classroom conditions and decides actions such as tur
 
 Over multiple training episodes, the agent learns to make better energy-efficient decisions.
 
-Environment State
+## Key Features
+
+- Reinforcement Learning based decision-making
+- Smart energy optimization for classrooms
+- Considers student presence and temperature
+- Time-of-day aware environment
+- Energy consumption modeling
+- AI learning visualization using training graphs
+
+## Environment State
 
 The classroom environment is represented using the following variables:
 
@@ -84,7 +96,7 @@ Computers	3 units
 
 The AI receives penalties when total energy usage becomes unnecessarily high.
 
-AI Training
+## AI Training
 
 The AI agent is trained using Q-Learning, a reinforcement learning algorithm.
 
@@ -97,7 +109,6 @@ The agent updates its decision strategy.
 
 Over time, the agent learns optimal actions that maximize reward.
 
-Training Result
 
 ## Training Result
 
@@ -116,10 +127,11 @@ As training progresses, the reward trend improves, showing that the AI agent lea
 ## Demo Output
 
 Below is a sample output of the Smart Classroom AI simulation.
+## Demo Simulation
 
 ![Demo Output](demo_output.png)
 
-Project Structure
+## Project Structure
 smart-classroom-energy-ai
 │
 ├── env.py
@@ -136,7 +148,7 @@ Matplotlib
 Reinforcement Learning (Q-Learning)
 Future Improvements
 
-Possible future extensions of this system include:
+## Possible future extensions of this system include:
 
 Integrating real IoT sensors for classroom monitoring
 Expanding the system to manage energy across an entire campus
