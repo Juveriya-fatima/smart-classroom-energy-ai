@@ -113,25 +113,11 @@ The graph below shows how the AI agent improves its decision-making over multipl
 As training progresses, the reward trend improves, showing that the AI agent learns how to manage classroom devices more effectively.
 
 
+## Demo Output
 
-Demo Simulation
+Below is a sample output of the Smart Classroom AI simulation.
 
-The system includes a demo script that simulates classroom decision-making.
-
-Run the demo using:
-
-python demo.py
-
-Example output:
-
-Students: 25
-Temperature: 33
-Time: Afternoon
-
-AI Decision: Turn AC ON
-Reward: +10
-
-This demonstrates how the AI agent observes the classroom environment and makes intelligent decisions.
+![Demo Output](demo_output.png)
 
 Project Structure
 smart-classroom-energy-ai
