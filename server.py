@@ -1,27 +1,28 @@
 from fastapi import FastAPI
-import random
+from env import SmartClassroomEnv
 
 app = FastAPI()
 
-state = {}
+env = SmartClassroomEnv()
+
+@app.get("/")
+def health():
+    return {"status": "running"}
 
 @app.post("/reset")
 def reset():
-    global state
-    state = {
-        "students": random.randint(20, 40),
-        "temperature": random.randint(22, 35)
-    }
-    return state
+    state = env.reset()
+    return {"state": state}
 
 @app.post("/step")
 def step(action: dict):
-    reward = random.uniform(0, 10)
-    done = False
+    act = action.get("action", None)
+
+    state, reward, done, info = env.step(act)
 
     return {
-        "students": state["students"],
-        "temperature": state["temperature"],
+        "state": state,
         "reward": reward,
-        "done": done
+        "done": done,
+        "info": info
     }
