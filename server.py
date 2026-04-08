@@ -3,24 +3,25 @@ import random
 
 app = FastAPI()
 
-state = {"students": 30, "temperature": 25}
-
-@app.get("/")
-def health():
-    return {"status": "ok"}
+state = {}
 
 @app.post("/reset")
 def reset():
-    state["students"] = random.randint(20, 40)
-    state["temperature"] = random.randint(22, 35)
+    global state
+    state = {
+        "students": random.randint(20, 40),
+        "temperature": random.randint(22, 35)
+    }
     return state
 
 @app.post("/step")
 def step(action: dict):
-    reward = random.random() * 10
+    reward = random.uniform(0, 10)
+    done = False
+
     return {
         "students": state["students"],
         "temperature": state["temperature"],
         "reward": reward,
-        "done": False
+        "done": done
     }
