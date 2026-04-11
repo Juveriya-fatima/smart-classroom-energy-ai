@@ -5,24 +5,28 @@ app = FastAPI()
 
 env = SmartClassroomEnv()
 
+
 @app.get("/")
 def health():
     return {"status": "running"}
 
+
 @app.post("/reset")
 def reset():
-    state = env.reset()
-    return {"state": state}
+    state, _ = env.reset()
+    return {"state": state.tolist()}
+
 
 @app.post("/step")
 def step(action: dict):
+
     act = action.get("action", None)
 
-    state, reward, done, info = env.step(act)
+    state, reward, done, truncated, info = env.step(act)
 
     return {
-        "state": state,
-        "reward": reward,
-        "done": done,
+        "state": state.tolist(),
+        "reward": float(reward),
+        "done": bool(done),
         "info": info
     }

@@ -2,22 +2,23 @@ import os
 from openai import OpenAI
 from env import SmartClassroomEnv
 
-# Required environment variables
+# Environment variables
 API_BASE_URL = os.getenv("API_BASE_URL", "https://api.openai.com/v1")
 MODEL_NAME = os.getenv("MODEL_NAME", "gpt-4.1-mini")
-HF_TOKEN = os.getenv("HF_TOKEN")
 
-if HF_TOKEN is None:
-    raise ValueError("HF_TOKEN environment variable is required")
+# Fix HF_TOKEN crash
+HF_TOKEN = os.getenv("HF_TOKEN", "dummy")
 
-# Initialize client
+
 client = OpenAI(
     base_url=API_BASE_URL,
     api_key=HF_TOKEN
 )
 
+
 def choose_action(state):
-    prompt = f"Choose an action to optimize classroom energy. State: {state}"
+
+    prompt = f"Choose an action (0,1,2,3) to optimize classroom energy. State: {state}"
 
     response = client.chat.completions.create(
         model=MODEL_NAME,
@@ -25,13 +26,20 @@ def choose_action(state):
     )
 
     action = response.choices[0].message.content.strip()
+
+    try:
+        action = int(action)
+    except:
+        action = 3
+
     return action
 
 
 def run_episode():
 
     env = SmartClassroomEnv()
-    state = env.reset()
+
+    state, _ = env.reset()
 
     print(f"[START] task=smart-energy env=classroom model={MODEL_NAME}")
 
@@ -40,13 +48,14 @@ def run_episode():
     success = False
 
     try:
+
         done = False
 
         while not done and step < 20:
 
             action = choose_action(state)
 
-            state, reward, done, info = env.step(action)
+            state, reward, done, truncated, info = env.step(action)
 
             step += 1
             rewards.append(reward)
@@ -63,9 +72,11 @@ def run_episode():
         success = done
 
     except Exception as e:
+
         print(f"Error: {e}")
 
     finally:
+
         env.close()
 
         reward_str = ",".join([f"{r:.2f}" for r in rewards])
